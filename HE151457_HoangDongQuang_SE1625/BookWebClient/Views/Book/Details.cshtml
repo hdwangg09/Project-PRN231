@@ -1,0 +1,73 @@
+﻿@using BusinessObject.Modals
+@model BusinessObject.Modals.Book
+
+@{
+	ViewData["Title"] = "Detail";
+	bool isAdmin = Context.Session.GetString("role") == "1" ? true : false;
+}
+@if (isAdmin)
+{
+	<div class="mr-4 ml-4">
+		<div>
+			<h4>Detail Book</h4>
+			<hr />
+			<dl class="row">
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.BookId)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.BookId)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Title)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.Title)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Type)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.Type)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Price)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.Price)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Royalty)
+				</dt>
+				<dd class="col-sm-10">
+					@Html.DisplayFor(model => model.Royalty)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.Pub)
+				</dt>
+				<dd class="col-sm-10">
+					@((ViewBag.Publisher as Publisher).PiblisherName)
+				</dd>
+				<dt class="col-sm-2">
+					@Html.DisplayNameFor(model => model.BookAuthors)
+				</dt>
+				<dd class="col-sm-10">
+					Id - Name - EmailAddress
+				</dd>
+				@foreach (var author in ViewBag.AuthorOwnedBook as List<Author>)
+				{
+					<dt class="col-sm-2">
+					</dt>
+					<dd class="col-sm-10">
+						@(author.AuthorId + " - " + author.FirstName + " " + author.LastName + " - " + author.EmailAddress)
+					</dd>
+				}
+			</dl>
+		</div>
+		<div>
+			<a asp-action="Index">Back to List</a>
+		</div>
+	</div>
+}
+
+

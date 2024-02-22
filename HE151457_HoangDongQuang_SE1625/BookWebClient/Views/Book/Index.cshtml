@@ -1,0 +1,77 @@
+﻿@using BusinessObject.Modals;
+@{
+	ViewData["Title"] = "Index";
+	bool isAdmin = Context.Session.GetString("role") == "1" ? true : false;
+}
+@if (isAdmin)
+{
+	<div class="ml-4 mr-4">
+		<div class="table-responsive-md">
+			<h4 class=" text-black fw-bold">Books</h4>
+
+			<a class="nav-link" asp-action="Create">Create a book</a>
+
+			@if (TempData["error"] != null)
+			{
+				<div class="alert alert-danger" role="alert">
+					@TempData["error"]
+				</div>
+			}
+			@if (TempData["success"] != null)
+			{
+				<div class="alert alert-success" role="alert">
+					@TempData["success"]
+				</div>
+			}
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>
+							BookId
+							 @* <br />
+							 <input id="searchId" type="number" placeholder="search" class="form-control" /> *@
+						</th>
+						<th>
+							Title
+							@* <br />
+							<input id="searchTitle" type="search" placeholder="search" class="form-control" /> *@
+						</th>
+						<th>
+							Type
+							@* <br />
+							<input id="searchType" type="search" placeholder="search" class="form-control" /> *@
+						</th>
+						<th>
+							Price
+							@* <br />
+							<input id="searchPrice" type="search" placeholder="search" class="form-control" /> *@
+						</th>
+						<th>
+							Royalty
+							@* <br />
+							<input id="searchRoyalty" type="search" placeholder="search" class="form-control" /> *@
+						</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody id="tb2">
+					@foreach (var item in ViewBag.Books as List<Book>)
+					{
+						<tr>
+							<td><a asp-action="Details" asp-route-id="@item.BookId">@item.BookId</a></td>
+							<td>@item.Title</td>
+							<td>@item.Type</td>
+							<td>@item.Price</td>
+							<td>@item.Royalty</td>
+							<td class="actions-user">
+								<a asp-action="Update" asp-route-id="@item.BookId">Edit</a> <span> | </span>
+								<a asp-action="Delete" asp-route-id="@item.BookId">Delete</a>
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+}
+

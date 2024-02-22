@@ -1,0 +1,14 @@
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\bin\Debug\net7.0\BusinessObject.deps.json
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\bin\Debug\net7.0\BusinessObject.runtimeconfig.json
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\bin\Debug\net7.0\BusinessObject.dll
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\bin\Debug\net7.0\BusinessObject.pdb
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\obj\Debug\net7.0\BusinessObject.csproj.AssemblyReference.cache
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\obj\Debug\net7.0\BusinessObject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\obj\Debug\net7.0\BusinessObject.AssemblyInfoInputs.cache
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\obj\Debug\net7.0\BusinessObject.AssemblyInfo.cs
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\obj\Debug\net7.0\BusinessObject.csproj.CoreCompileInputs.cache
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\obj\Debug\net7.0\BusinessObject.dll
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\obj\Debug\net7.0\refint\BusinessObject.dll
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\obj\Debug\net7.0\BusinessObject.pdb
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\obj\Debug\net7.0\BusinessObject.genruntimeconfig.cache
+C:\Users\hdwan\OneDrive\Desktop\PRN231\Coding\Class\HE151457_HoangDongQuang_SE1625\BusinessObject\obj\Debug\net7.0\ref\BusinessObject.dll

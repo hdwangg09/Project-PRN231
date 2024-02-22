@@ -1,0 +1,50 @@
+﻿@model BusinessObject.Modals.User
+@{
+    ViewData["Title"] = "Register";
+    Layout = "_LayoutSignInUp";
+}
+
+<form method="post" asp-action="Register">
+    <div class="d-flex align-items-center justify-content-center">
+        <p class="lead fw-bold text-info mb-3 me-3 fs-3">Book Stores Register</p>
+    </div>
+    @if (TempData["error"] != null)
+    {
+        <span class="d-block text-danger">@TempData["error"]</span>
+    }
+    <div class="form-group mb-3">
+        <input asp-for="EmailAddress" class="form-control form-control-lg"
+               placeholder="Enter email address" />
+        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+        @if (TempData["errorMsg"] != null)
+        {
+            <span asp-validation-for="EmailAddress" class="text-danger">@TempData["errorMsg"]</span>
+        }
+    </div>
+
+    <div class="form-group mb-3">
+        <input asp-for="Password" class="form-control form-control-lg"
+               placeholder="Enter password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <input asp-for="FristName" class="form-control form-control-lg"
+               placeholder="Enter First Name" />
+        <span asp-validation-for="FristName" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-3">
+        <input asp-for="LastName" class="form-control form-control-lg"
+               placeholder="Enter Last Name" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <button type="submit" class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;">
+            Register
+        </button>
+        <a asp-action="Login" class="nav-link">Already an user?</a>
+    </div>
+</form>
+

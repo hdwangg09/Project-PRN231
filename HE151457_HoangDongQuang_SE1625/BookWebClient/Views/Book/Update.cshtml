@@ -1,0 +1,168 @@
+﻿@using BusinessObject.Modals;
+@model BusinessObject.Modals.Book
+
+@{
+    ViewData["Title"] = "Edit";
+    bool isAdmin = Context.Session.GetString("role") == "1" ? true : false;
+
+}
+@if (isAdmin)
+{
+    <div class="ml-4 mr-4">
+        <h4>Edit Book</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Update">
+                    <input type="hidden" asp-for="BookId" />
+                    <div class="form-group">
+                        <label asp-for="Title" class="control-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Type" class="control-label"></label>
+                        <input asp-for="Type" class="form-control" />
+                        <span asp-validation-for="Type" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Royalty" class="control-label"></label>
+                        <input asp-for="Royalty" class="form-control" />
+                        <span asp-validation-for="Royalty" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="PubId" class="control-label">Publisher</label>
+                        <select asp-for="PubId" class="form-control">
+                            @foreach (var item in ViewBag.Publishers as List<Publisher>)
+                            {
+                                if (Model.PubId == item.PibId)
+                                {
+                                    <option value="@item.PibId" selected>@item.PiblisherName</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.PibId">@item.PiblisherName</option>
+                                }
+                            }
+                        </select>
+                        <span asp-validation-for="PubId" class="text-danger"></span>
+                    </div>
+                    <div id="lsAuthor">
+                        <label class="control-label">Author</label>
+                        <span id="msgErrorAuthor" class='d-block text-danger'></span>
+                        @{
+                            var lsAuthorOwned = ViewBag.AuthorOwnedBook as List<Author>;
+                            for (int i = 0; i < lsAuthorOwned.Count; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <div class="form-group d-flex align-items-center">
+                                        <select name="IdAuthor" class="form-control">
+                                            @{
+                                                foreach (var item in ViewBag.Authors as List<Author>)
+                                                {
+                                                    if (lsAuthorOwned[i].AuthorId == item.AuthorId)
+                                                    {
+                                                        <option value="@item.AuthorId" selected>@(item.FirstName + " " + item.LastName)</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.AuthorId">@(item.FirstName + " " + item.LastName)</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="form-group d-flex align-items-center">
+                                        <select name="IdAuthor" class="form-control">
+                                            @{
+                                                foreach (var item in ViewBag.Authors as List<Author>)
+                                                {
+                                                    if (lsAuthorOwned[i].AuthorId == item.AuthorId)
+                                                    {
+                                                        <option value="@item.AuthorId" selected>@(item.FirstName + " " + item.LastName)</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="@item.AuthorId">@(item.FirstName + " " + item.LastName)</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                        <a class='ml-2 remove-author' href='#'>Remove</a>
+                                    </div>
+                                }
+                            }
+                        }
+
+                    </div>
+                    <div class="form-group">
+                        <input id="btnMore" type="button" value="More Author" class="btn btn-primary" />
+                    </div>
+                    <div class="form-group">
+                        <input id="btnSubmit" type="submit" value="Save" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+
+}
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(document).ready(function () {
+            $("#btnMore").click(function () {
+                var element = $("#lsAuthor .form-group:first").clone();
+                element.append("<a class='ml-2 remove-author' href='#'>Remove</a>")
+                $("#lsAuthor").append(element);
+                bindEventRemove();
+            });
+            var bindEventRemove = function () {
+                $(".remove-author").click(function (e) {
+                    e.preventDefault();
+                    $(this).parent().remove();
+                })
+            }
+            bindEventRemove();
+            $("#btnSubmit").click(function (e) {
+                var arrVal = [];
+                $("#lsAuthor .form-group select option:selected").each(function () {
+                    arrVal.push($(this).val());
+                });
+                if (duplicateAuthor(arrVal) == true) {
+                    e.preventDefault();
+                    $("#msgErrorAuthor").html("Please not select author duplicate")
+                    return false;
+                }
+                return true;
+            })
+            function duplicateAuthor(arr) {
+                var valDuplicate = arr.filter(function (value, index) {
+                    return arr.indexOf(value) !== index
+                })
+                if (valDuplicate.length == 0) {
+                    return false;
+                }
+                return true;
+            }
+        })
+    </script>
+}

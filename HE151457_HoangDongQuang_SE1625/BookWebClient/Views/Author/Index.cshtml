@@ -1,0 +1,151 @@
+﻿@using BusinessObject.Modals;
+@model BusinessObject.Modals.Author;
+@{
+    ViewData["Title"] = "Index";
+    bool isAdmin = Context.Session.GetString("role") == "1" ? true : false;
+}
+@if (isAdmin)
+{
+    <div class="ml-4 mr-4">
+
+        <form class="form-group form-create" method="post" asp-action="Create">
+            <h4 class="text-black fw-bold">Enter Author Information</h4>
+            <table class="ml-4" style="border-collapse: separate;border-spacing: 0px 10px;">
+                <tr>
+                    <td class="mr-5">
+                        <label asp-for="FirstName" class="text-black form-label">First name:</label>
+                    </td>
+                    <td>
+                        <input asp-for="FirstName" class="form-control" placeholder="first name" />
+                    </td>
+                    <td>
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="LastName" class="text-black form-label">Last name:</label>
+                    </td>
+                    <td>
+                        <input asp-for="LastName" class="form-control" placeholder="last name" />
+                    </td>
+                    <td>
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Phone" class="text-black form-label">Phone:</label>
+                    </td>
+                    <td>
+                        <input asp-for="Phone" class="form-control" placeholder="phone" />
+                    </td>
+                    <td>
+                        <span asp-validation-for="Phone" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="City" class="text-black form-label">City:</label>
+                    </td>
+                    <td>
+                        <input asp-for="City" class="form-control" placeholder="city" />
+                    </td>
+                    <td>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Address" class="text-black form-label">Address:</label>
+                    </td>
+                    <td>
+                        <input asp-for="Address" class="form-control" placeholder="address" />
+                    </td>
+                    <td>
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="pr-5">
+                        <label asp-for="EmailAddress" class="text-black form-label">Email address:</label>
+                    </td>
+                    <td>
+                        <input asp-for="EmailAddress" class="form-control" placeholder="email address" />
+                    </td>
+                    <td>
+                        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        @* <button id="btnClear" type="button" class="btn btn-primary">Clear</button> *@
+                    </td>
+                </tr>
+            </table>
+        </form>
+        @if (TempData["error"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["error"]
+            </div>
+        }
+        @if (TempData["success"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["success"]
+            </div>
+        }
+        <div class="table-responsive-md">
+            <h4 class=" text-black fw-bold">Authors</h4>
+            <table class="table table-striped">
+                <thead >
+                    <tr>
+                        <th>
+                            AuthorId
+                            @* <br />
+                            <input id="searchId" type="number" min="1" placeholder="search" class="form-control" /> *@
+                        </th>
+                        <th>
+                            FirstName
+                         @*    <br />
+                            <input id="searchFName" type="search" placeholder="search" class="form-control" /> *@
+                        </th>
+                        <th>
+                            LastName
+                           @*  <br />
+                            <input id="searchLName" type="search" placeholder="search" class="form-control" /> *@
+                        </th>
+                        <th>
+                            City
+                           @*  <br />
+                            <input id="searchCity" type="search" placeholder="search" class="form-control" /> *@
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tb2">
+                    @foreach (var item in ViewBag.Authors as List<Author>)
+                    {
+                        <tr>
+                            <td><a asp-action="Details" asp-route-id="@item.AuthorId">@item.AuthorId</a></td>
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@item.City</td>
+                            <td class="actions-user">
+
+                                <a asp-action="Update" asp-route-id="@item.AuthorId">Edit</a> <span> | </span>
+                                <a asp-action="Delete" asp-route-id="@item.AuthorId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+

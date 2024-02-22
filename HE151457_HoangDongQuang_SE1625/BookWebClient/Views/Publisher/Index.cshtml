@@ -1,0 +1,111 @@
+﻿@using BusinessObject.Modals;
+@model BusinessObject.Modals.Publisher;
+@{
+    ViewData["Title"] = "Index";
+    bool isAdmin = Context.Session.GetString("role") == "1" ? true : false;
+}
+@if (isAdmin)
+{
+    <div class="ml-4 mr-4">
+
+        <form class="form-group form-create" method="post" asp-action="Create">
+            <h4 class="text-black fw-bold">Enter Publisher Information</h4>
+            <table class="ml-4" style="border-collapse: separate;border-spacing: 0px 10px;">
+                <tr>
+                    <td class="pr-5">
+                        <label asp-for="PiblisherName" class="text-black form-label">Publisher name:</label>
+                    </td>
+                    <td>
+                        <input asp-for="PiblisherName" class="form-control" placeholder="publisher's name" />
+                    </td>
+                    <td>
+                        <span asp-validation-for="PiblisherName" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="City" class="text-black form-label">City:</label>
+                    </td>
+                    <td>
+                        <input asp-for="City" class="form-control" placeholder="city" />
+                    </td>
+                    <td>
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label asp-for="Country" class="text-black form-label">Country:</label>
+                    </td>
+                    <td>
+                        <input asp-for="Country" class="form-control" placeholder="country" />
+                    </td>
+                    <td>
+                        <span asp-validation-for="Country" class="text-danger"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                         @* <button id="btnClear" type="button" class="btn btn-primary">Clear</button> *@
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        @if (TempData["error"] != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @TempData["error"]
+            </div>
+        }
+        @if (TempData["success"] != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @TempData["success"]
+            </div>
+        }
+        <div class="table-responsive-md">
+            <h4 class=" text-black fw-bold">Publishers</h4>
+            <table class="table table-striped">
+                <thead>
+                @* <thead style="background-color: #99ccff, color:red"> *@
+                    <tr>
+                        <th>
+                            PublisherId
+                            @* <br />
+                            <input id="searchId" type="number" placeholder="search" class="form-control" /> *@
+                        </th>
+                        <th>
+                            PublisherName
+                            @* <br />
+                            <input id="searchName" type="search" placeholder="search" class="form-control" /> *@
+                        </th>
+                        <th>
+                            City
+                            @* <br />
+                            <input id="searchCity" type="search" placeholder="search" class="form-control" /> *@
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tb2">
+                    @foreach (var item in ViewBag.Publisher as List<Publisher>)
+                    {
+                        <tr>
+                            <td><a asp-action="Details" asp-route-id="@item.PibId">@item.PibId</a></td>
+                            <td>@item.PiblisherName</td>
+                            <td>@item.City</td>
+                            <td class="actions-user">
+                                <a asp-action="Update" asp-route-id="@item.PibId">Edit</a> <span> | </span>
+                                <a asp-action="Delete" asp-route-id="@item.PibId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

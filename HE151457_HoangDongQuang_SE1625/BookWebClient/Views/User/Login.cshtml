@@ -1,0 +1,48 @@
+﻿@model BusinessObject.Modals.User
+@{
+    ViewData["Title"] = "Login";
+    Layout = "_LayoutSignInUp";
+}
+
+@section Styles {
+    <link rel="stylesheet" type="text/css" href="~/css/signIn.css" />
+}
+
+<form method="post" asp-action="Login">
+    <div class="d-flex align-items-center justify-content-center">
+        <p class="lead fw-bold text-info mb-3 me-3 fs-3">Book Stores Login</p>
+    </div>
+    @if (TempData["error"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @TempData["error"]
+        </div>
+    }
+    @if (TempData["success"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @TempData["success"]
+        </div>
+    }
+
+    <div class="form-group mb-3">
+        <input asp-for="EmailAddress" class="form-control form-control-lg"
+               placeholder="Enter email address" />
+        <span asp-validation-for="EmailAddress" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <input asp-for="Password" class="form-control form-control-lg"
+               placeholder="Enter password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+        <button type="submit" class="btn btn-primary btn-lg"
+                style="padding-left: 2.5rem; padding-right: 2.5rem;">
+            Login
+        </button>
+        <a asp-action="Register" class="nav-link">Register?</a>
+    </div>
+</form>
+
